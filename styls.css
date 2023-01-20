@@ -1,0 +1,82 @@
+body{
+    --color-rouge:rgb(220, 46, 36);
+    --color-beige:#f7f7f7;
+}
+.container_game{
+    margin-top: 50px;
+    background: radial-gradient(ellipse at top, #a14f14, transparent),
+            radial-gradient(ellipse at bottom,  #6c370d, transparent);
+    width: 800px;
+    height: 400px;
+}
+/* player 1 */
+
+.container_player1{
+    background-color:var(--color-beige);
+    height: 365px;
+}
+.input_score1{
+    height: 50px;
+    width: 50px;
+    background-color: white;
+    color: var(--color-rouge);
+}
+
+
+/* player 2 */
+.container_player2{
+    background-color: white;
+}
+.input_score2{
+    height: 50px;
+    width: 50px;
+    background-color:var(--color-beige);
+    color: var(--color-rouge);
+}
+/* ---------------container des------------------ */
+.container_des{
+/* background-color:rgba(255, 255, 255, 0.268); */
+height: 365px;
+/* border: solid 1px; */
+width: 150px;
+}
+
+
+/* --------------------global-------------------- */
+.title_players,.text_current{
+    font-family: 'Lato', sans-serif;
+    font-size: 2rem;
+    margin-top: 60px;
+}
+.texts_middle{
+    font-family: 'Lato', sans-serif;
+
+}
+
+.scoreCurrent{
+    background-color:var(--color-rouge);
+    width: 90px;
+    height: 70px;
+    margin:auto;
+}
+.input_scoreCurrent{
+    margin-top: 20px;
+    margin-bottom: 70px;
+}
+.text_current{
+    margin-top: 10px;
+    font-size: 10px;
+}
+.input_current{
+    width: 20px;
+    height: 20px;
+    margin: auto;
+    background-color: var(--color-rouge);
+    color: white;
+}
+.bi{
+    color: var(--color-rouge);
+}
+.texts_middle{
+    margin: auto;
+}
