@@ -12,7 +12,7 @@ body{
 /* player 1 */
 
 .container_player1{
-    background-color:var(--color-beige);
+    background-color:white;
     height: 365px;
 }
 .input_score1{
@@ -45,10 +45,15 @@ width: 150px;
 /* --------------------global-------------------- */
 .title_players,.text_current{
     font-family: 'Lato', sans-serif;
+    font-weight: 300;
     font-size: 2rem;
     margin-top: 60px;
+ 
 }
 .texts_middle{
+    border: none;
+    padding: auto;
+    background-color:transparent;
     font-family: 'Lato', sans-serif;
 
 }
@@ -79,4 +84,24 @@ width: 150px;
 }
 .texts_middle{
     margin: auto;
+}
+/*  style tour player  js */
+
+.tour_player{
+    background-color:var(--color-beige);
+
+}
+.tour_player .title_players{
+    font-weight: 400;
+}
+.tour_player .play_pastille {
+    display: inline-block;
+    margin-left: 5px;
+    width: 15px;
+    height: 15px;
+    border-radius: 50%;
+    background-color:var(--color-rouge);
+    margin-top: auto;
+    margin-bottom: auto;
+    
 }

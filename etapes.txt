@@ -1,0 +1,20 @@
+
+1.new game:
+
+* function newGame 
+* quand on appuis sur le bts new game on initialise le partie on lance newGame:
+* le variable score1 de Player 1 a 0
+* le variable score2 de Player 2 a 0
+* on donne le tour a player 1
+
+
+Donne le tour au joueur x :
+
+function tourPlayer (player)
+affecter la valeur player a la variable tour
+on enleve la class tour_player a celui qui ne joeux pas 
+on ajoute la class  tour_player a celui qui joeux
+
+roll dice:
+quand on clique sur le btn ROLL DICE ca fait chaner aleatoirement le valeur du des et on change l'image
+la valeur du des est stocque dans la variable resultatDes
