@@ -15,19 +15,14 @@ body{
     background-color:white;
     height: 365px;
 }
-.input_score1{
-    height: 50px;
-    width: 50px;
-    background-color: white;
-    color: var(--color-rouge);
-}
+
 
 
 /* player 2 */
 .container_player2{
     background-color: white;
 }
-.input_score2{
+.score_globalle-resultat2{
     height: 50px;
     width: 50px;
     background-color:var(--color-beige);
@@ -64,15 +59,21 @@ width: 150px;
     height: 70px;
     margin:auto;
 }
-.input_scoreCurrent{
+.score_globalle{
+    margin-left: auto;
     margin-top: 20px;
     margin-bottom: 70px;
+}
+.score_globalle-resultat{
+    font-size: 3rem;
+    margin: auto;
+    color: var(--color-rouge);
 }
 .text_current{
     margin-top: 10px;
     font-size: 10px;
 }
-.input_current{
+.score_current {
     width: 20px;
     height: 20px;
     margin: auto;
@@ -81,9 +82,11 @@ width: 150px;
 }
 .bi{
     color: var(--color-rouge);
+    
 }
 .texts_middle{
     margin: auto;
+    color: black;
 }
 /*  style tour player  js */
 
@@ -104,4 +107,7 @@ width: 150px;
     margin-top: auto;
     margin-bottom: auto;
     
+}
+.inactive{
+    display: none;
 }
