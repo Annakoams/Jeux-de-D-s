@@ -1,41 +1,55 @@
 
-//  initialisation des variables du joeux
+//  initialisation des variables du jeux
 let tour = 0;
 let score1 = 0;
 let score2 = 0;
 let resultatDes = 0;
+const scoreToeach =10;
 
 // declarer une variables buttons
-const btnNewGame = document.getElementById('btnNewGame')
-const btnRollDice = document.getElementById('btnRollDice')
-const btnHold = document.getElementById('btnHold')
+const btnNewGame = document.getElementById('btnNewGame');
+const btnRollDice = document.getElementById('btnRollDice');
+const btnHold = document.getElementById('btnHold');
 
 
 // declarer les variables des players
-const player1 = document.getElementById('divPlayer1')
-const player2 = document.getElementById('divPlayer2')
+const player1 = document.getElementById('divPlayer1');
+const player2 = document.getElementById('divPlayer2');
 
 //  declares les variables des current
-const current1 = document.getElementById('current1')
-const current2 = document.getElementById('current2')
+const current1 = document.getElementById('current1');
+const current2 = document.getElementById('current2');
 
 
 //  declarer les scores 
-const divScore1 = document.getElementById('divScore1')
-const divScore2 = document.getElementById('divScore2')
+const divScore1 = document.getElementById('divScore1');
+const divScore2 = document.getElementById('divScore2');
 
+// declere les popups
+const popup = document.getElementById('popup');
 
-//  function New Game qui reinitialise les scores et 
+// declarer btn close
+const btnClose = document.getElementById('btnClose');
+// 
+const h3Msg = document.getElementById('msg');
+
+//  function New Game qui reinitialise les scores 
 function newGame() {
     score1 = 0;
     score2 = 0;
     tourPlayer(1);
-
 }
-//  declarel les des -------------------------
-// let nombreDes = document.getElementById('des0').lenght;
+//  function showPopup  qui affiche le popup avec les messages
+function showPopup (message){
+    popup.classList.add('active');
+    h3Msg.textContent = message;
+}
+// function hidePopup qui retire le popup
+function hidePopup(){
+    popup.classList.remove('active');
+}
 
-
+//  function TourPlayer qui change les parties, affiche image de des 0.  
 function tourPlayer(player) {
     //  si le  player1 joue il a la classe tour_player et on retire classe tour_player au player 2
     tour = player;
@@ -53,13 +67,13 @@ function tourPlayer(player) {
     if (tour == 2) player2.classList.add('tour_player');
     else player2.classList.remove('tour_player');
 
-    if(tour==0) btnRollDice.classList.add('inactive') ; 
-    else btnRollDice.classList.remove('inactive') 
+    if (tour == 0) btnRollDice.classList.add('inactive');
+    else btnRollDice.classList.remove('inactive')
 
 }
 
 
-// function roll dice ca jet les des, ca genere le nombre aleatoire entre 1 et 6 , ca change l'image et la valeur de resultatDes,  si resultat egale a 1 c'est au tour d'un autre joueur et on affecte le resultatDes au courrent
+// function roll dice  jet les des, genere le nombre aleatoire entre 1 et 6 ,  change l'image et la valeur de resultatDes,  si resultat egale a 1 c'est au tour d'un autre joueur et on affecte le resultatDes au courrent
 
 function rollDice() {
 
@@ -79,95 +93,83 @@ function rollDice() {
 
     resultatDes = nombre;
 
-    console.log(resultatDes)
-    // afficher la somme des  resultats de resultatDes dans le cunteur pour ensuite le stocke dans le current
+    //  btn hold qui apparets
+
     btnHold.classList.remove('inactive');
-    // let cunteur = resultatDes ;
-    // 
+    
     if (tour == 1) {
         current1.textContent = resultatDes;
         if (resultatDes == 1) {
             tourPlayer(2);
-            alert("jueur 1 vous passer votre tour");
+            showPopup("You draw one so lose a round.");
         }
     }
     else {
         current2.textContent = resultatDes;
         if (resultatDes == 1) {
             tourPlayer(1);
-            alert("jueur 2 vous passer votre tour");
+            showPopup("You draw one so lose a round.");
         }
     }
-
-
-
-
-
-
-    // current1 = resultatDes.tourPlayer()
-
-
-
-    // si le resultat est de 1 le joueur passe son tour
-
-
-
-
 }
 
-// on ajoute le resultatDes au score du joueur en cours est c'est le tour a l'autre joueur, le jeux s'arrett au score 100 et alert apparet avec le joueur gagniant
+// function hold ajoute le resultatDes au score du jueur en cours est c'est le tour a l'autre joueur, le jeux s'arrett au score 100 et alert apparet avec le joueur gagniant
 
 function hold() {
     if (tour == 1) {
         score1 = score1 + resultatDes;
         divScore1.textContent = score1;
-        if (score1 >= 10) {
-            alert("Jueur 1 vous avez gagné ! ");
+        if (score1 >= scoreToeach) {
+            showPopup("Player 1 You are the Winner !!! Bravo !!! ");
+            newGame()
             tourPlayer(0);
+            
+            
         }
         else tourPlayer(2);
     }
     else {
         score2 = score2 + resultatDes;
         divScore2.textContent = score2;
-        if (score2 >= 10) {
-            alert("Jueur 2 vous avez gagné ! ");
+        if (score2 >= scoreToeach) {
+            showPopup("Player 2 You are the Winner !!! Bravo !!!")
+            newGame()
             tourPlayer(0);
+            
         }
         else tourPlayer(1);
-
-
     }
+}
+
+popup.addEventListener('click', hidePopup);
+btnHold.addEventListener('click', hold);
+btnRollDice.addEventListener('click', rollDice);
+btnNewGame.addEventListener('click', newGame);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+const lancerDe = function () {
+    const nombreDecimal = (Math.random() * 6) + 1
+    const nombre = Math.trunc(nombreDecimal)
+
+    return nombre
+}
+// creation de objets resultat
+const deChiffre = {
 
 }
-    btnHold.addEventListener('click', hold);
-    btnRollDice.addEventListener('click', rollDice);
-    btnNewGame.addEventListener('click', newGame);
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    const lancerDe = function () {
-        const nombreDecimal = (Math.random() * 6) + 1
-        const nombre = Math.trunc(nombreDecimal)
-
-        return nombre
-    }
-    // creation de objets resultat
-    const deChiffre = {
-
-    }
-
-    // garder le resultat
-    const resultat = lancerDe()
+// garder le resultat
+const resultat = lancerDe()
