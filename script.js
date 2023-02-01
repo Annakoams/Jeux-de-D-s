@@ -10,6 +10,11 @@ const scoreToeach =10;
 const btnNewGame = document.getElementById('btnNewGame');
 const btnRollDice = document.getElementById('btnRollDice');
 const btnHold = document.getElementById('btnHold');
+// ---
+let isRotating = false;
+
+// -----
+let elements = document.getElementById('des0');
 
 
 // declarer les variables des players
@@ -37,8 +42,16 @@ const h3Msg = document.getElementById('msg');
 function newGame() {
     score1 = 0;
     score2 = 0;
+    // 
+    divScore1.textContent = score1;
+    divScore2.textContent = score2;
+    // 
+    current1.textContent = "";
+    current2.textContent = "";
     tourPlayer(1);
 }
+
+
 //  function showPopup  qui affiche le popup avec les messages
 function showPopup (message){
     popup.classList.add('active');
@@ -55,7 +68,6 @@ function tourPlayer(player) {
     tour = player;
     btnHold.classList.add('inactive');
 
-    let elements = document.getElementById('des0');
 
     // elements qui change le image ??????
 
@@ -75,32 +87,46 @@ function tourPlayer(player) {
 
 // function roll dice  jet les des, genere le nombre aleatoire entre 1 et 6 ,  change l'image et la valeur de resultatDes,  si resultat egale a 1 c'est au tour d'un autre joueur et on affecte le resultatDes au courrent
 
-function rollDice() {
+function startRollDice() {
 
-    //nouvelle variable nombre qui stock  le chiffre aleatoire entre 1 et 6
-
-    let nombre = Math.floor(Math.random() * 6) + 1;
-
-    // nouvelle variable qui stock image de des
-
-    let elements = document.getElementById('des0');
-
-    // elements qui change le image ??????
-
-    elements.setAttribute("src", "images/dice" + nombre + ".png");
-
-    //  le resultat de resultatDes egale nombre aleatoire
-
-    resultatDes = nombre;
 
     //  btn hold qui apparets
 
     btnHold.classList.remove('inactive');
+    elements.classList.add('rotate');
+    setTimeout(rollDice,2000);
+
+    isRotating = true;
     
+    changeDice();
+    }
+
+    function changeDice (){
+
+        if(!isRotating) return
+
+        resultatDes = Math.floor(Math.random() * 6) + 1;
+
+        elements.setAttribute("src", "images/dice" + resultatDes + ".png");
+    
+    setTimeout(changeDice,200)
+
+    }
+
+    function rollDice() {
+    //  jesli premiere tour: current1 recois le resultat de des, jesli  resultat de des est egale a 1 dans ce cas player 1 passe le tour et c'est a player 2
+
+    // --------
+    isRotating = false;
+
+    elements.classList.remove('rotate');
+
+
     if (tour == 1) {
         current1.textContent = resultatDes;
         if (resultatDes == 1) {
             tourPlayer(2);
+            resultatDes = 0;
             showPopup("You draw one so lose a round.");
         }
     }
@@ -113,7 +139,7 @@ function rollDice() {
     }
 }
 
-// function hold ajoute le resultatDes au score du jueur en cours est c'est le tour a l'autre joueur, le jeux s'arrett au score 100 et alert apparet avec le joueur gagniant
+// function hold ajoute le resultatDes au score du jueur en cours est c'est le tour a l'autre joueur, le jeux s'arrett au score 100 et alert apparet avec le joueur qui a gagne
 
 function hold() {
     if (tour == 1) {
@@ -121,8 +147,12 @@ function hold() {
         divScore1.textContent = score1;
         if (score1 >= scoreToeach) {
             showPopup("Player 1 You are the Winner !!! Bravo !!! ");
-            newGame()
+            
             tourPlayer(0);
+            // 
+            // newGame();
+            // 
+           
             
             
         }
@@ -133,8 +163,11 @@ function hold() {
         divScore2.textContent = score2;
         if (score2 >= scoreToeach) {
             showPopup("Player 2 You are the Winner !!! Bravo !!!")
-            newGame()
+            
             tourPlayer(0);
+            // 
+            // newGame();
+            // 
             
         }
         else tourPlayer(1);
@@ -143,7 +176,7 @@ function hold() {
 
 popup.addEventListener('click', hidePopup);
 btnHold.addEventListener('click', hold);
-btnRollDice.addEventListener('click', rollDice);
+btnRollDice.addEventListener('click', startRollDice);
 btnNewGame.addEventListener('click', newGame);
 
 
@@ -160,16 +193,3 @@ btnNewGame.addEventListener('click', newGame);
 
 
 
-const lancerDe = function () {
-    const nombreDecimal = (Math.random() * 6) + 1
-    const nombre = Math.trunc(nombreDecimal)
-
-    return nombre
-}
-// creation de objets resultat
-const deChiffre = {
-
-}
-
-// garder le resultat
-const resultat = lancerDe()

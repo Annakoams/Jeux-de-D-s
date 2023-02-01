@@ -113,6 +113,16 @@ width: 150px;
     display: none;
 }
 
+#des0{
+    transform: rotate(0deg);
+    transition: all ease-out 0s;
+}
+
+#des0.rotate{
+    transform: rotate(1800deg);
+    transition: all ease-out 2s;
+}
+
 
 
 /* pop up */
