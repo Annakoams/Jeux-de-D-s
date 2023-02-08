@@ -4,7 +4,7 @@ let tour = 0;
 let score1 = 0;
 let score2 = 0;
 let resultatDes = 0;
-const scoreToeach =10;
+const scoreToeach =100;
 
 // declarer une variables buttons
 const btnNewGame = document.getElementById('btnNewGame');
@@ -85,7 +85,7 @@ function tourPlayer(player) {
 }
 
 
-// La fonction startRollDice() déclenche le processus de lancement de dés. Elle enlève la classe "inactive" du bouton "hold" pour le rendre visible, ajoute la classe "rotate" pour animer les dés, puis appelle la fonction rollDice() après 2 secondes. Elle définit également une variable isRotating sur true et appelle la fonction changeDice() pour faire défiler les images de dés aléatoirement jusqu'à ce que isRotating soit défini sur false.
+// La fonction startRollDice déclenche le processus de lancement de dés. Elle enlève la classe "inactive" du bouton "hold" pour le rendre visible, ajoute la classe "rotate" pour animer les dés, puis appelle la fonction rollDice() après 2 secondes. Elle définit également une variable isRotating sur true et appelle la fonction changeDice() pour faire défiler les images de dés aléatoirement jusqu'à ce que isRotating soit défini sur false.
 
 function startRollDice() {
 
