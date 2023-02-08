@@ -10,10 +10,11 @@ const scoreToeach =10;
 const btnNewGame = document.getElementById('btnNewGame');
 const btnRollDice = document.getElementById('btnRollDice');
 const btnHold = document.getElementById('btnHold');
-// ---
+
+// declarer la varible de rotation , elle est desactive
 let isRotating = false;
 
-// -----
+// declarer la variable elements qui contien l'images
 let elements = document.getElementById('des0');
 
 
@@ -38,7 +39,7 @@ const btnClose = document.getElementById('btnClose');
 // 
 const h3Msg = document.getElementById('msg');
 
-//  function New Game qui reinitialise les scores 
+//  function New Game qui reinitialise les scores et change le tour a tourPlayer 1 
 function newGame() {
     score1 = 0;
     score2 = 0;
@@ -52,7 +53,7 @@ function newGame() {
 }
 
 
-//  function showPopup  qui affiche le popup avec les messages
+//  function showPopup  qui affiche un pop-up avec le message passé en paramètre.
 function showPopup (message){
     popup.classList.add('active');
     h3Msg.textContent = message;
@@ -62,14 +63,13 @@ function hidePopup(){
     popup.classList.remove('active');
 }
 
-//  function TourPlayer qui change les parties, affiche image de des 0.  
+// function tourPlayer change de tour en ajoutant la classe "tour_player" au joueur actuel et en enlevant la classe du joueur précédent. Il met également à jour l'image du dé à 0.
+
 function tourPlayer(player) {
-    //  si le  player1 joue il a la classe tour_player et on retire classe tour_player au player 2
+   
     tour = player;
     btnHold.classList.add('inactive');
 
-
-    // elements qui change le image ??????
 
     elements.setAttribute("src", "images/dice0.png");
 
@@ -85,7 +85,7 @@ function tourPlayer(player) {
 }
 
 
-// function roll dice  jet les des, genere le nombre aleatoire entre 1 et 6 ,  change l'image et la valeur de resultatDes,  si resultat egale a 1 c'est au tour d'un autre joueur et on affecte le resultatDes au courrent
+// La fonction startRollDice() déclenche le processus de lancement de dés. Elle enlève la classe "inactive" du bouton "hold" pour le rendre visible, ajoute la classe "rotate" pour animer les dés, puis appelle la fonction rollDice() après 2 secondes. Elle définit également une variable isRotating sur true et appelle la fonction changeDice() pour faire défiler les images de dés aléatoirement jusqu'à ce que isRotating soit défini sur false.
 
 function startRollDice() {
 
@@ -101,6 +101,10 @@ function startRollDice() {
     changeDice();
     }
 
+
+
+    // La fonction changeDice() change l'image des dés en utilisant un nombre aléatoire compris entre 1 et 6. Elle vérifie d'abord si isRotating est false, et s'arrête si c'est le cas. Elle définit ensuite resultatDes comme le nombre aléatoire généré et met à jour l'image de dés en utilisant l'attribut "src". Elle appelle ensuite elle-même après 200 millisecondes. 
+
     function changeDice (){
 
         if(!isRotating) return
@@ -113,10 +117,11 @@ function startRollDice() {
 
     }
 
-    function rollDice() {
-    //  jesli premiere tour: current1 recois le resultat de des, jesli  resultat de des est egale a 1 dans ce cas player 1 passe le tour et c'est a player 2
 
-    // --------
+    // La fonction rollDice() termine l'animation en définissant isRotating sur false et en enlevant la classe "rotate". Elle définit ensuite la valeur du joueur actuel en fonction du tour (1 ou 2) en utilisant current1.textContent ou current2.textContent. Si resultatDes est égal à 1, la fonction appelle tourPlayer() avec l'autre joueur (1 ou 2) et affiche une notification avec showPopup().
+
+    function rollDice() {
+
     isRotating = false;
 
     elements.classList.remove('rotate');
@@ -139,7 +144,7 @@ function startRollDice() {
     }
 }
 
-// function hold ajoute le resultatDes au score du jueur en cours est c'est le tour a l'autre joueur, le jeux s'arrett au score 100 et alert apparet avec le joueur qui a gagne
+// La fonction hold() permet à un joueur de tenir son score actuel en ajoutant le score du jet de dé à son score total. Si le score total dépasse le score cible, la partie est terminée et une notification de gagnant est affichée. Sinon, le tour passe au joueur suivant.
 
 function hold() {
     if (tour == 1) {
@@ -149,12 +154,6 @@ function hold() {
             showPopup("Player 1 You are the Winner !!! Bravo !!! ");
             
             tourPlayer(0);
-            // 
-            // newGame();
-            // 
-           
-            
-            
         }
         else tourPlayer(2);
     }
@@ -165,10 +164,6 @@ function hold() {
             showPopup("Player 2 You are the Winner !!! Bravo !!!")
             
             tourPlayer(0);
-            // 
-            // newGame();
-            // 
-            
         }
         else tourPlayer(1);
     }
